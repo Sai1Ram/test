@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Model - {% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<style>
+  #set-height {
+    display: block;
+  }
+
+  #v0 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  p font-family helvetica {
+    font-size: 24px;
+  }
+</style>
+
+<!-- Add Elements to Play Video
+set-height div is used to set height of page according to playBack const and video duration 
+video element uses the explanation_video file from exhibition_entry-->
+<div id="set-height"></div>
+<p id="time"></p>
+<video id="v0" tabindex="0" autobuffer="autobuffer" preload="preload">
+  <source type="video/mp4" src="/{{Exhibition_Entry.animation_video}}">
+  </source>
+</video>
+
+<script>
+
+  var frameNumber = 0, // start video at frame 0
+    // lower numbers = faster playback
+    playbackConst = 1000,
+    // get page height from video duration
+    setHeight = document.getElementById("set-height"),
+    // select video element         
+    vid = document.getElementById('v0');
+
+  //Add eventlistener to set page height according to video duration after loading video
+  vid.addEventListener('loadedmetadata', function () {
+    //Update the page height
+    setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
+  });
+
+
+  //Add eventlistener to go to modelPage and view model individually after double clicking in video
+  vid.addEventListener("dblclick", () => {
+    const url = new URL(window.location.href);
+    const path = url.pathname;
+    const id = path.split('/').pop();
+    window.location.assign(`/modelPage/${id}`)
+  })
+
+
+
+  // Functions to play video of 3D animation based on scrolling input
+  function scrollPlay() {
+    //Change framenumber according to the position of scroll window
+    var frameNumber = window.pageYOffset / playbackConst;
+    vid.currentTime = frameNumber;
+    window.requestAnimationFrame(scrollPlay);
+  }
+
+  //start animation for playing video with scrolling
+  window.requestAnimationFrame(scrollPlay);
+</script>
+
+{% endblock %}

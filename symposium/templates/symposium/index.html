@@ -1,0 +1,121 @@
+{% extends 'base.html' %} {% load static %} {% block content%}
+
+<script
+  defer="defer"
+  src="{% static 'bundle.f224e26b4908278d86b5.js' %}"
+></script>
+
+<style>
+  html,
+  body {
+    overflow: hidden;
+  }
+  .zoom-out-animation {
+    animation: zoomOut 3s forwards ease-in-out;
+  }
+  @keyframes zoomOut {
+    0% {
+      width: 300%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+</style>
+
+<div
+  class="w-screen overflow-y-scroll h-screen scrollbar-hide"
+  style="scroll-snap-type: y mandatory"
+>
+  <div class="fixed top-0 left-0 w-full">{% include 'navbar.html' %}</div>
+  <div class="snap-start w-full h-screen text-white overflow-hidden">
+    <div
+      class="section w-[300%] h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      style="background-image: url('../../static/symposium/image-7.jpg')"
+    >
+    <div class="flex flex-col justify-center  items-center">
+      <h1 class="text-animation text-white opacity-100 animate__animated text-[4rem]">Lorem ipsum dolor sit amet.</h1>
+      <h1 class="text-animation text-white animate__delay-1s opacity-0 animate__animated text-2xl ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est aliquid, iusto inventore praesentium ipsam voluptate.</h1>
+    </div>
+    </div>
+  </div>
+  <div class="snap-start w-full h-screen overflow-hidden">
+    <div
+      class="section w-[300%] h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      style="background-image: url('../../static/symposium/image-2.jpg')"
+    >
+    <div class="flex flex-col justify-center  items-center">
+      <h1 class="text-animation text-white opacity-100 animate__animated text-[4rem]">Lorem ipsum dolor sit amet.</h1>
+      <h1 class="text-animation text-white animate__delay-1s opacity-0 animate__animated text-2xl ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, eos earum ut quaerat aliquid pariatur.</h1>
+    </div>
+  </div>
+  </div>
+  <div class="snap-start w-full h-screen overflow-hidden">
+    <div
+      class="section w-[300%] h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      style="background-image: url('../../static/symposium/image-6.jpg')"
+    >   
+    <div class="flex flex-col justify-center  items-center">
+      <h1 class="text-animation text-white opacity-100 animate__animated text-[4rem]">Lorem ipsum dolor sit amet.</h1>
+      <h1 class="text-animation text-white animate__delay-1s opacity-0 animate__animated text-2xl ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non minus aliquam laborum eum eius maiores.</h1>
+    </div>
+  </div>
+  </div>
+  <div class="snap-start w-full h-screen overflow-hidden">
+    <div
+      class="section w-[300%] h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      style="background-image: url('../../static/symposium/image-3.jpg')"
+    >
+    <div class="flex flex-col justify-center  items-center">
+      <h1 class="text-animation text-white opacity-100 animate__animated text-[4rem]">Lorem ipsum dolor sit amet.</h1>
+      <h1 class="text-animation text-white animate__delay-1s opacity-0 animate__animated text-2xl ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex aliquam delectus consequuntur laudantium, modi esse.</h1>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+  // Function to handle intersection observer events
+  function handleIntersection(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("zoom-out-animation");
+      }
+    });
+  }
+
+  // Create a new intersection observer
+  const bgObserver = new IntersectionObserver(handleIntersection, {
+    rootMargin: "0px",
+    threshold: 0.2, // Adjust this threshold value as needed
+  });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate__backInLeft");
+          entry.target.classList.remove("opacity-0");
+        }
+      });
+    },
+    { rootMargin: "0px", threshold: 0.5 }
+  );
+
+  // Get all the fade-in elements and observe them
+  const fadeElements = document.querySelectorAll(".section");
+  fadeElements.forEach((element) => {
+    bgObserver.observe(element);
+  });
+  const textAnimations = document.querySelectorAll(".text-animation");
+  textAnimations.forEach((element) => {
+    observer.observe(element);
+  });
+</script>
+
+<script>
+  (TEXT = "{{ event.name }}"), (TEXTURE = "{{ event.hero_image }}");
+</script>
+
+{% endblock %}
+
+<!-- style="background-image: url('../../static/symposium/image1.jpg')" -->
