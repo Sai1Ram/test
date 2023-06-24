@@ -143,4 +143,6 @@ MEDIA_ROOT = 'uploads'
 MEDIA_URL = '/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/lobby'
-# ALLOWED_HOSTS = ['192.168.0.133']
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static'),
+ALLOWED_HOSTS = ['.versel.app', '.now.sh']
