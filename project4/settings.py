@@ -34,7 +34,7 @@ CONSTANCE_CONFIG = {
 }
 
 TAILWIND_APP_NAME = 'theme'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 ROOT_URLCONF = 'project4.urls'
 
 
